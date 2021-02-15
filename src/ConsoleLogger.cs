@@ -8,7 +8,7 @@ namespace TwitterBot
 {
     public class ConsoleLogger
     {
-        static void ConsoleLog(string s)
+        public static void ConsoleLog(string s)
         {
             Console.WriteLine($"[{DateTime.Now}] {s}");
         }
