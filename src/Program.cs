@@ -7,7 +7,8 @@ namespace TwitterBot
     {
         static void Main(string[] args)
         {
-
+            StartupClass.Startup();
+            StartupClass.SharePost();
         }
     }
 }

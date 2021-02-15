@@ -9,10 +9,21 @@ using System.Threading.Tasks;
 
 namespace TwitterBot
 {
-    public class SharePost
+    public class StartupClass
     {
-        static FirefoxDriver fireFoxDriver;
-        static void sharePost()
+        public static FirefoxDriver fireFoxDriver;
+        public static void Startup()
+        {
+            FirefoxOptions options = new FirefoxOptions();
+
+            // Makes browser to hide
+            //options.AddArgument("--headless");
+            FirefoxDriverService firefoxDriverService = FirefoxDriverService.CreateDefaultService();
+            firefoxDriverService.HideCommandPromptWindow = true;
+            fireFoxDriver = new FirefoxDriver(firefoxDriverService, options);
+        }
+
+        public static void SharePost()
         {
             // Goes to the Twitter Login page
             fireFoxDriver.Navigate().GoToUrl("https://www.twitter.com/login");
@@ -33,12 +44,12 @@ namespace TwitterBot
             // Clicks on the Username Input box
             usernameInput.Click();
             // Enters Username in Input box
-            usernameInput.SendKeys("@DChemEngrDev");
+            usernameInput.SendKeys("Enter your username");
 
             // Clicks on the Password Input box
             userPasswordInput.Click();
             // Enters Password into the Input box
-            userPasswordInput.SendKeys("Aniekanabasi");
+            userPasswordInput.SendKeys("Enter your password");
 
             Thread.Sleep(250);
 
@@ -50,10 +61,10 @@ namespace TwitterBot
             Thread.Sleep(4000);
 
             // Locates New Tweet Input
-            IWebElement tweetInputArea = fireFoxDriver.FindElementByXPath("/html/body/div/div/div/div[2]/main/div/div/div/div/div/div[2]/div/div[2]/div[1]/div/div/div/div[2]/div[1]/div/div/div/div/div/div/div/div/div/div[1]/div/div/div/div/div");
+            IWebElement tweetInputArea = fireFoxDriver.FindElementByXPath("/html/body/div/div/div/div[2]/main/div/div/div/div/div/div[2]/div/div[2]/div[1]/div/div/div/div[2]/div[1]/div/div/div/div/div/div/div/div/div/div[1]/div/div/div/div[2]/div");
 
             // Enters tweet
-            tweetInputArea.SendKeys("Hi! This is my bot tweeting.");
+            tweetInputArea.SendKeys("Hi! This is my bot tweeting. This bot is built using C#.");
 
             ConsoleLogger.ConsoleLog("Tweet successfully entered!");
 
@@ -71,7 +82,6 @@ namespace TwitterBot
 
 
             fireFoxDriver.Quit();
-
         }
     }
 }
